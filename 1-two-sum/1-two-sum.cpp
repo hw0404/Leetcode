@@ -1,23 +1,19 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> v;
-        bool stop = false;
-        for(int i=0;i<nums.size()-1;i++){
-            for(int j=i+1;j<nums.size();j++){
-                if(nums[i]+nums[j]==target){
-                    v.push_back(i);
-                    v.push_back(j);
-                    stop = true;
-                    break;
-                }// end if
-                
-            }//end for jj
-            if( stop ){
-                break;
+        map<int,int> m;
+        //hashmap사용하기
+        for(int i=0;i<nums.size();i++){
+            int gap = target-nums[i];
+            map<int,int>::iterator iter;
+            iter = m.find(gap);
+            if(iter != m.end()){//만약 존재하면
+                return {i,m[gap]};
+            }else{
+                m.insert({nums[i],i});
             }
-        }//end for i
-        return  v;
+        }
+        return {};
     }  //end func 
     
 };
